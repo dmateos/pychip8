@@ -92,21 +92,21 @@ class CPU(object):
             if lastbit == 0x0:
                 self.inst_setreg(reg, reg2)
             elif lastbit == 0x1:
-                self.inst_setreg(self.v[reg], self.v[reg] | self.v[reg2])
+                self.inst_setreg(reg, self.v[reg] | self.v[reg2])
             elif lastbit == 0x2:
-                self.inst_setreg(self.v[reg], self.v[reg] & self.v[reg2])
+                self.inst_setreg(reg, self.v[reg] & self.v[reg2])
             elif lastbit == 0x3:
-                self.inst_setreg(self.v[reg], self.v[reg] ^ self.v[reg2])
+                self.inst_setreg(reg, self.v[reg] ^ self.v[reg2])
             elif lastbit == 0x4:
                 #TODO set borrow flag
-                self.inst_setreg(self.v[reg], self.v[reg] + self.v[reg2])
+                self.inst_setreg(reg, self.v[reg] + self.v[reg2])
             elif lastbit == 0x5:
                 #TODO set borrow flag
-                self.inst_setreg(self.v[reg], self.v[reg] - self.v[reg2])
+                self.inst_setreg(reg, self.v[reg] - self.v[reg2])
             elif lastbit == 0x6:
-                self.inst_setreg(self.v[reg], self.v[reg2] - self.v[reg])
+                self.inst_setreg(reg, self.v[reg2] - self.v[reg])
             elif lastbit == 0x6:
-                self.inst_setreg(self.v[reg], self.v[reg2] - self.v[reg])
+                self.inst_setreg(reg, self.v[reg2] - self.v[reg])
             elif lastbit == 0x6:
                 pass
             elif lastbit == 0x7:
@@ -126,8 +126,10 @@ class CPU(object):
         elif opcode == 0xC:
             reg = self.mmu.get4bit(self.pc+4)
             value = self.mmu.get8bit(self.pc+8)
-            random = randint(0, 255)
-            self.inst_setreg(self.v[reg], random & value)
+            rand = randint(0, 255)
+
+            print("#{0} {1} {2} {3}".format(reg, value, rand, rand & value))
+            self.inst_setreg(reg, rand & value)
         elif opcode == 0xD:
             pass
         elif opcode == 0xE:
