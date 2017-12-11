@@ -7,5 +7,5 @@ class Loader(object):
 
     def read(self):
         with open(self.path, "r") as tfile:
-            self.data = bitstring.Bits(tfile)
+            self.data = bitstring.BitArray(tfile)
 
