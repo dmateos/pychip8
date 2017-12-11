@@ -2,17 +2,23 @@ from random import randint
 
 class CPU(object):
     def __init__(self, mmu):
-        #General v (16 bit) 0-F
+        #General registers v(0,0xf) (16 bit)
         self.v = [0 for n in range(0, 0xF)]
 
-        #16 bit I register
+        #Seperate i register (16bit) 
         self.i = None
 
-        #Stack (should be 16 levels deep) 16bit
+        #Stack (should be 16 levels deep) (16bit)
         self.stack = []
 
         #Program counter
         self.pc = 0x200
+
+        #Delay timer (60hz)
+        self.clock = 0
+
+        #Sound timer (60 hz)
+        self.sound = 0
 
         #memory
         self.mmu = mmu
